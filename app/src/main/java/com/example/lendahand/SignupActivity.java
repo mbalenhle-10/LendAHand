@@ -1,7 +1,11 @@
 package com.example.lendahand;
 
-public class SignupActivity {
-    package com.example.lendahand;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+
+
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,4 +18,3 @@ import androidx.appcompat.app.AppCompatActivity;
             setContentView(R.layout.activity_signup);
         }
     }
-}
