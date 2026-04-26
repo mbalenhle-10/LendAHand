@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button signInButton;
     TextView createAccountText;
 
-    String loginUrl = "http://13.135.14.204/api/auth/login.php"; // ← replace YOUR_IP
+    String loginUrl = "http://13.135.14.204/api/auth/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         createAccountText.setOnClickListener(v -> {
             // navigate to register screen when ready
-            // startActivity(new Intent(this, RegisterActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
         });
     }
 
