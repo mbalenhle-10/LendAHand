@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(this, "Welcome " + username, Toast.LENGTH_SHORT).show();
 
                             // navigate to next screen after login
-                            // Intent intent = new Intent(this, HomeActivity.class);
-                            // startActivity(intent);
-                            // finish();
+                            Intent intent = new Intent(this, DashBoardActivity.class);
+                            startActivity(intent);
+                            finish();
 
                         } else {
                             String message = json.getString("message");
