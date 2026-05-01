@@ -25,6 +25,7 @@
 
         <activity android:name=".RegisterActivity" />
         <activity android:name=".DashBoardActivity"/>
+        <activity android:name=".DonateActivity"/>
     </application>
 
 </manifest>

@@ -1,6 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#F4F1EA"
+android:fillViewport="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Donate Items"
+        android:textColor="#2B2B2B"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share what you can with others"
+        android:textColor="#5F5A55"
+        android:textSize="14sp"
+        android:layout_marginTop="6dp" />
+
+    <!-- Card Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="20dp"
+        android:layout_marginTop="24dp">
+
+        <!-- Category label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textColor="#9A948F"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Category Spinner -->
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@android:color/transparent"
+            android:textColor="#2B2B2B" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0DBD5"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Item label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item"
+            android:textColor="#9A948F"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Item Spinner (filtered by selected category) -->
+        <Spinner
+            android:id="@+id/spinnerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@android:color/transparent"
+            android:textColor="#2B2B2B" />
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0DBD5"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Quantity label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity"
+            android:textColor="#9A948F"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Quantity -->
+        <EditText
+            android:id="@+id/editDonateQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g. 2"
+            android:inputType="number"
+            android:textColor="#2B2B2B"
+            android:textColorHint="#9A948F"
+            android:background="@android:color/transparent"
+            android:padding="12dp" />
+
+    </LinearLayout>
+
+    <!-- Loading indicator (hidden by default) -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/btnSubmitDonation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit Donation"
+        android:textColor="#FFFFFF"
+        android:background="#8A6F5A"
+        android:layout_marginTop="24dp"
+        android:padding="14dp" />
+
+</LinearLayout>
+</ScrollView>
