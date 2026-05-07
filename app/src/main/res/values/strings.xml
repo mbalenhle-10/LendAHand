@@ -1,3 +1,57 @@
 <resources>
-    <string name="app_name">Lend-A-Hand</string>
+    <string name="app_name">LendAHand</string>
+
+    <!-- MY DONATIONS SCREEN -->
+    <string name="my_donations">MY DONATIONS</string>
+    <string name="thank_you_giving_back">Thank you for giving back 🎁</string>
+    <string name="plus_symbol">+</string>
+    <string name="add_item">Add Item</string>
+
+    <string name="two">2</string>
+    <string name="available">Available</string>
+    <string name="one">1</string>
+    <string name="partial">Partial</string>
+    <string name="matched">Matched</string>
+
+    <string name="active_donations">ACTIVE DONATIONS</string>
+    <string name="rice">Rice</string>
+    <string name="rice_details">10 kg · Food</string>
+    <string name="zero_recipients">0 recipients so far</string>
+
+    <string name="blankets">Blankets</string>
+    <string name="blankets_details">3 units · Clothing</string>
+
+    <string name="in_progress">IN PROGRESS</string>
+    <string name="cooking_oil">Cooking Oil</string>
+    <string name="cooking_oil_details">2 litres · Food</string>
+    <string name="going_to_family">Going to a family in your area</string>
+
+    <!-- MY NEEDS SCREEN -->
+    <string name="my_needs">MY NEEDS</string>
+    <string name="community_back">Your community has your back 🤝</string>
+    <string name="add_need">+ Add Need</string>
+
+    <string name="three_pending">3\nPending</string>
+    <string name="one_progress">1\nIn Progress</string>
+    <string name="two_fulfilled">2\nFulfilled</string>
+
+    <string name="waiting_for_help">WAITING FOR HELP</string>
+
+    <string name="baby_formula">🥛 Baby Formula</string>
+    <string name="baby_formula_details">2 tins · Food &amp; Nutrition</string>
+    <string name="pending_zero">Pending · 0% matched</string>
+
+    <string name="school_shoes">👟 School Shoes</string>
+    <string name="school_shoes_details">Size 4 · Clothing</string>
+
+    <string name="being_fulfilled">BEING FULFILLED</string>
+    <string name="vitamins">💊 Vitamins</string>
+    <string name="vitamins_details">1 bottle · Health</string>
+    <string name="sarah_helping">Sarah from your community is helping</string>
+    <string name="partial_sixty">Partial · 60% matched</string>
+
+    <string name="received_thank_you">RECEIVED — THANK YOU 💚</string>
+    <string name="textbooks">📚 Textbooks</string>
+    <string name="textbooks_details">3 books · Education</string>
+    <string name="fulfilled">Fulfilled ✓</string>
 </resources>
