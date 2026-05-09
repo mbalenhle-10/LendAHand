@@ -95,13 +95,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("name", name);
-                params.put("username", email);
-                params.put("email", email);
+                params.put("fullname", name);
+                params.put("email",    email);
                 params.put("password", password);
-                params.put("phone", phone);
-                params.put("contact", contact);
-                params.put("bio", bio);
+                params.put("phone",    phone);
+                params.put("bio",      bio);
                 return params;
             }
         };

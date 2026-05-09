@@ -26,6 +26,9 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".DashBoardActivity"/>
         <activity android:name=".DonateActivity"/>
+        <activity android:name=".MyNeeds"/>
+        <activity android:name=".MyDonations"/>
+        <activity android:name=".AddNeedActivity"/>
     </application>
 
 </manifest>
