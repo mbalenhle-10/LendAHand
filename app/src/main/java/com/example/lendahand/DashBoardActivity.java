@@ -33,7 +33,7 @@ public class DashBoardActivity extends AppCompatActivity {
     private String username;
 
     // API
-    private final String statsUrl = "http://13.135.14.204/api/dashboard/stats.php";
+    private final String statsUrl = "http://13.135.14.204/api/auth/stats.php";;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +89,8 @@ public class DashBoardActivity extends AppCompatActivity {
       btnAddDonation.setOnClickListener(v ->
               startActivity(new Intent(this, DonateActivity.class)));
 
- //     btnAddNeed.setOnClickListener(v ->
- //             startActivity(new Intent(this, RequestActivity.class)));
+      btnAddNeed.setOnClickListener(v ->
+              startActivity(new Intent(this, MyNeeds.class)));
 
  //     btnViewMatches.setOnClickListener(v ->
  //             startActivity(new Intent(this, MatchesActivity.class)));

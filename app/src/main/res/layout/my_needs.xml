@@ -47,9 +47,8 @@
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
-            <!-- FIX: brighter background for contrast + minHeight/minWidth for touch target -->
             <TextView
-                android:id="@+id/btnAddNeed"
+                android:id="@+id/btnplusneed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/add_need"
@@ -76,36 +75,39 @@
             android:weightSum="3">
 
             <TextView
+                android:id="@+id/tvStatPending"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
                 android:gravity="center"
                 android:background="#3D5059"
-                android:text="@string/three_pending"
+                android:text="0&#10;Pending"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvStatPartial"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
                 android:gravity="center"
                 android:background="#3D5059"
-                android:text="@string/one_progress"
+                android:text="0&#10;In Progress"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvStatFulfilled"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:background="#3D5059"
-                android:text="@string/two_fulfilled"
+                android:text="0&#10;Fulfilled"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -120,187 +122,11 @@
         android:clipToPadding="false">
 
         <LinearLayout
+            android:id="@+id/cardsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/waiting_for_help"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#5F5A55"
-                android:layout_marginBottom="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="3dp"
-                android:layout_marginBottom="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/baby_formula"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#2B2B2B" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/baby_formula_details"
-                    android:textSize="13sp"
-                    android:textColor="#5F5A55"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pending_zero"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#92400E"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="3dp"
-                android:layout_marginBottom="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/school_shoes"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#2B2B2B" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/school_shoes_details"
-                    android:textSize="13sp"
-                    android:textColor="#5F5A55"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pending_zero"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#92400E"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/being_fulfilled"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#5F5A55"
-                android:layout_marginBottom="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="3dp"
-                android:layout_marginBottom="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vitamins"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#2B2B2B" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vitamins_details"
-                    android:textSize="13sp"
-                    android:textColor="#5F5A55"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sarah_helping"
-                    android:textSize="12sp"
-                    android:textColor="#1D4ED8"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/partial_sixty"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#1D4ED8"
-                    android:layout_marginTop="6dp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/received_thank_you"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#5F5A55"
-                android:layout_marginBottom="10dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="3dp"
-                android:layout_marginBottom="24dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/textbooks"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#2B2B2B" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/textbooks_details"
-                    android:textSize="13sp"
-                    android:textColor="#5F5A55"
-                    android:layout_marginTop="4dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fulfilled"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#2F6B3E"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
-
-        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
