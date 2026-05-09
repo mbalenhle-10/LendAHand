@@ -92,11 +92,11 @@ public class DashBoardActivity extends AppCompatActivity {
       btnAddNeed.setOnClickListener(v ->
               startActivity(new Intent(this, MyNeeds.class)));
 
- //     btnViewMatches.setOnClickListener(v ->
- //             startActivity(new Intent(this, MatchesActivity.class)));
+      btnViewMatches.setOnClickListener(v ->
+              startActivity(new Intent(this, MatchDonateActivity.class)));
 
- //     btnMyActivity.setOnClickListener(v ->
- //             startActivity(new Intent(this, MyActivity.class)));
+      btnMyActivity.setOnClickListener(v ->
+              startActivity(new Intent(this, MyDonations.class)));
  }
 
     // ─────────────────────────────────────────────
