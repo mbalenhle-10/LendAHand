@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LendAHand</string>
 
@@ -6,23 +7,16 @@
     <string name="thank_you_giving_back">Thank you for giving back 🎁</string>
     <string name="plus_symbol">+</string>
     <string name="add_item">Add Item</string>
-
     <string name="two">2</string>
     <string name="available">Available</string>
     <string name="one">1</string>
     <string name="partial">Partial</string>
     <string name="matched">Matched</string>
-
     <string name="active_donations">ACTIVE DONATIONS</string>
-    <string name="rice">Rice</string>
     <string name="rice_details">10 kg · Food</string>
     <string name="zero_recipients">0 recipients so far</string>
-
-    <string name="blankets">Blankets</string>
     <string name="blankets_details">3 units · Clothing</string>
-
     <string name="in_progress">IN PROGRESS</string>
-    <string name="cooking_oil">Cooking Oil</string>
     <string name="cooking_oil_details">2 litres · Food</string>
     <string name="going_to_family">Going to a family in your area</string>
 
@@ -30,28 +24,99 @@
     <string name="my_needs">MY NEEDS</string>
     <string name="community_back">Your community has your back 🤝</string>
     <string name="add_need">+ Add Need</string>
-
     <string name="three_pending">3\nPending</string>
     <string name="one_progress">1\nIn Progress</string>
     <string name="two_fulfilled">2\nFulfilled</string>
-
     <string name="waiting_for_help">WAITING FOR HELP</string>
-
-    <string name="baby_formula">🥛 Baby Formula</string>
     <string name="baby_formula_details">2 tins · Food &amp; Nutrition</string>
     <string name="pending_zero">Pending · 0% matched</string>
-
     <string name="school_shoes">👟 School Shoes</string>
     <string name="school_shoes_details">Size 4 · Clothing</string>
-
     <string name="being_fulfilled">BEING FULFILLED</string>
     <string name="vitamins">💊 Vitamins</string>
     <string name="vitamins_details">1 bottle · Health</string>
     <string name="sarah_helping">Sarah from your community is helping</string>
     <string name="partial_sixty">Partial · 60% matched</string>
-
     <string name="received_thank_you">RECEIVED — THANK YOU 💚</string>
     <string name="textbooks">📚 Textbooks</string>
     <string name="textbooks_details">3 books · Education</string>
     <string name="fulfilled">Fulfilled ✓</string>
+
+    <!-- ADD A NEED SCREEN -->
+    <string name="add_need_title">Add a Need</string>
+    <string name="add_need_subtitle">Tell the community what you require</string>
+    <string name="quantity_needed">Quantity needed</string>
+    <string name="unit_label">Unit</string>
+    <string name="minus">−</string>
+    <string name="urgency_level">Urgency level</string>
+    <string name="note_hint">e.g. size 4 for a 6-year-old girl...</string>
+    <string name="submit_need">Submit Need</string>
+
+    <!-- SHARED RESOURCE NAMES -->
+    <string name="rice">Rice</string>
+    <string name="maize_meal">Maize Meal</string>
+    <string name="cooking_oil">Cooking Oil</string>
+    <string name="blankets">Blankets</string>
+    <string name="clothing_adults">Clothing (Adults)</string>
+    <string name="clothing_children">Clothing (Children)</string>
+    <string name="school_stationery">School Stationery</string>
+    <string name="sanitary_products">Sanitary Products</string>
+    <string name="canned_goods">Canned Goods</string>
+    <string name="baby_formula">Baby Formula</string>
+
+    <!-- SHARED SECTION LABELS -->
+    <string name="choose_resource">Choose a resource</string>
+    <string name="additional_note">Additional note (optional)</string>
+    <string name="urgency_low">Low</string>
+    <string name="urgency_medium">Medium</string>
+    <string name="urgency_high">High</string>
+
+    <!-- MATCH AND DONATE SCREEN -->
+    <string name="match_donate_title">Match &amp; Donate</string>
+    <string name="match_donate_subtitle">Pick a resource &#8594; allocate to those in need</string>
+    <string name="allocation_progress">ALLOCATION PROGRESS</string>
+    <string name="people_who_need">PEOPLE WHO NEED RICE</string>
+    <string name="allocating_label">Allocating</string>
+    <string name="alloc_default">5 / 10 kg</string>
+    <string name="nearby_count">3 nearby</string>
+    <string name="urgency_label">urgency</string>
+    <string name="back_arrow">&#8592;</string>
+
+    <!-- AVATARS -->
+    <string name="avatar_nk">NK</string>
+    <string name="avatar_bm">BM</string>
+    <string name="avatar_lp">LP</string>
+
+    <!-- RECIPIENT: NOMSA -->
+    <string name="nomsa_name">Nomsa K.</string>
+    <string name="nomsa_meta">Needs 5 kg · Soweto</string>
+    <string name="nomsa_tag">Urgent · Family of 4</string>
+    <string name="nomsa_default_val">3 kg</string>
+    <string name="nomsa_max">max 5 kg</string>
+
+    <!-- RECIPIENT: BONGANI -->
+    <string name="bongani_name">Bongani M.</string>
+    <string name="bongani_meta">Needs 3 kg · Alexandra</string>
+    <string name="bongani_tag">Single parent</string>
+    <string name="bongani_default_val">2 kg</string>
+    <string name="bongani_max">max 3 kg</string>
+
+    <!-- RECIPIENT: LERATO -->
+    <string name="lerato_name">Lerato P.</string>
+    <string name="lerato_meta">Needs 8 kg · Diepkloof</string>
+    <string name="lerato_tag">Household of 6</string>
+    <string name="lerato_default_val">0 kg</string>
+    <string name="lerato_max">max 8 kg</string>
+
+    <!-- CONFIRM / NOTE -->
+    <string name="donation_note_hint">Add any details about your donation or delivery preferences&#8230;</string>
+    <string name="confirm_allocations">Confirm Allocations</string>
+
+    <!-- FORMAT STRINGS (placeholders for Java) -->
+    <string name="kg_value">%d kg</string>
+    <string name="alloc_progress">%1$d / %2$d kg</string>
+    <string name="total_limit_reached">Total limit of %d kg reached</string>
+    <string name="alloc_success">%d kg allocated successfully!</string>
+    <string name="alloc_empty_warning">Please allocate at least 1 kg before confirming.</string>
+
 </resources>
