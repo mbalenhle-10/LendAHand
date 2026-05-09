@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unit_options">
+        <item>units</item>
+        <item>kg</item>
+        <item>litres</item>
+        <item>tins</item>
+        <item>pairs</item>
+        <item>bottles</item>
+    </string-array>
+</resources>

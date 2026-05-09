@@ -119,4 +119,15 @@
     <string name="alloc_success">%d kg allocated successfully!</string>
     <string name="alloc_empty_warning">Please allocate at least 1 kg before confirming.</string>
 
+    <!-- ACCESSIBILITY - stepper button descriptions -->
+    <string name="decrease_recipient1">Decrease allocation for recipient one</string>
+    <string name="increase_recipient1">Increase allocation for recipient one</string>
+    <string name="decrease_recipient2">Decrease allocation for recipient two</string>
+    <string name="increase_recipient2">Increase allocation for recipient two</string>
+    <string name="decrease_recipient3">Decrease allocation for recipient three</string>
+    <string name="increase_recipient3">Increase allocation for recipient three</string>
+
+    <string name="qty_decrease">Decrease quantity</string>
+    <string name="qty_increase">Increase quantity</string>
+
 </resources>

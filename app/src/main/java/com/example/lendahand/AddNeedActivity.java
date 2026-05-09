@@ -3,12 +3,9 @@ package com.example.lendahand;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,16 +32,18 @@ public class AddNeedActivity extends AppCompatActivity {
 
     private static final String BASE_URL = "http://13.135.14.204/api/auth/";
 
-    private final LinkedHashMap<String, List<Map<String, String>>> categoryItemMap = new LinkedHashMap<>();
-    private final List<String>              categoryNames = new ArrayList<>();
-    private       List<Map<String, String>> currentItems  = new ArrayList<>();
-
     // Views
-    private Spinner     spinnerCategory;
-    private Spinner     spinnerItem;
-    private EditText    editNeedQuantity;
-    private Button      btnSubmitNeed;
-    private ProgressBar progressBar;
+    private View        btnSubmitNeed;
+    private TextView    tvQtyDisplay;
+    private View        btnQtyPlus;
+    private View        btnQtyMinus;
+    private Spinner     spinnerUnit;
+    private EditText    etNote;
+    private View        btnBack;
+
+    private int currentQty = 2;
+    private String selectedItemId = "1"; // Default to Rice
+    private final List<View> resourceButtons = new ArrayList<>();
 
     private final OkHttpClient httpClient = new OkHttpClient();
 
@@ -59,12 +58,11 @@ public class AddNeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_need_activity);
+        setContentView(R.layout.add_a_need);
 
         initSession();
         bindViews();
         setupListeners();
-        fetchItems();
     }
 
     // ---------------------------------------------------------------
@@ -81,134 +79,84 @@ public class AddNeedActivity extends AppCompatActivity {
     // ---------------------------------------------------------------
 
     private void bindViews() {
-        spinnerCategory  = findViewById(R.id.spinnerCategory);
-        spinnerItem      = findViewById(R.id.spinnerItem);
-        editNeedQuantity = findViewById(R.id.editNeedQuantity);
         btnSubmitNeed    = findViewById(R.id.btnSubmitNeed);
-        progressBar      = findViewById(R.id.progressBar);
+        tvQtyDisplay     = findViewById(R.id.tvQtyDisplay);
+        btnQtyPlus       = findViewById(R.id.btnQtyPlus);
+        btnQtyMinus      = findViewById(R.id.btnQtyMinus);
+        spinnerUnit      = findViewById(R.id.spinnerUnit);
+        etNote           = findViewById(R.id.etNote);
+        btnBack          = findViewById(R.id.btnBack);
     }
-
-    // ---------------------------------------------------------------
-    // Listeners
-    // ---------------------------------------------------------------
 
     private void setupListeners() {
-        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedCategory = categoryNames.get(position);
-                currentItems = categoryItemMap.get(selectedCategory);
-                populateItemSpinner(currentItems);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+        btnQtyPlus.setOnClickListener(v -> {
+            currentQty++;
+            updateQtyDisplay();
         });
 
+        btnQtyMinus.setOnClickListener(v -> {
+            if (currentQty > 1) {
+                currentQty--;
+                updateQtyDisplay();
+            }
+        });
+
+        btnBack.setOnClickListener(v -> finish());
         btnSubmitNeed.setOnClickListener(v -> submitNeed());
-    }
 
-    // ---------------------------------------------------------------
-    // Step 1: Fetch predefined items from the server (shared endpoint)
-    // ---------------------------------------------------------------
+        // Setup individual resource buttons (Grid in XML)
+        int[] resIds = {
+                R.id.btnRice, R.id.btnMaize, R.id.btnCookingOil, R.id.btnBlankets,
+                R.id.btnClothingAdults, R.id.btnClothingChildren, R.id.btnStationery,
+                R.id.btnSanitary, R.id.btnCanned, R.id.btnBabyFormula
+        };
+        String[] names = {
+                "Rice", "Maize Meal", "Cooking Oil", "Blankets",
+                "Clothing (Adults)", "Clothing (Children)", "School Stationery",
+                "Sanitary Products", "Canned Goods", "Baby Formula"
+        };
+        String[] ids = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
-    private void fetchItems() {
-        setLoading(true);
-
-        Request request = new Request.Builder()
-                .url(BASE_URL + "items.php")
-                .get()
-                .build();
-
-        httpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> {
-                    setLoading(false);
-                    Toast.makeText(AddNeedActivity.this,
-                            "Could not load items. Check your connection.", Toast.LENGTH_LONG).show();
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String body = response.body() != null ? response.body().string() : "[]";
-                runOnUiThread(() -> {
-                    setLoading(false);
-                    try {
-                        parseAndPopulateItems(new JSONArray(body));
-                    } catch (JSONException e) {
-                        Toast.makeText(AddNeedActivity.this,
-                                "Unexpected server response.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
-
-    // ---------------------------------------------------------------
-    // Parse the flat item array → grouped by category
-    // ---------------------------------------------------------------
-
-    private void parseAndPopulateItems(JSONArray jsonArray) throws JSONException {
-        categoryItemMap.clear();
-        categoryNames.clear();
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj  = jsonArray.getJSONObject(i);
-            String category = obj.getString("category");
-            String itemId   = obj.getString("item_id");
-            String itemName = obj.getString("item_name");
-            String unit     = obj.optString("unit", "");
-
-            if (!categoryItemMap.containsKey(category)) {
-                categoryItemMap.put(category, new ArrayList<>());
-                categoryNames.add(category);
-            }
-
-            Map<String, String> item = new LinkedHashMap<>();
-            item.put("item_id",   itemId);
-            item.put("item_name", itemName);
-            item.put("unit",      unit);
-            categoryItemMap.get(category).add(item);
+        for (int i = 0; i < resIds.length; i++) {
+            final View btn = findViewById(resIds[i]);
+            if (btn == null) continue;
+            final String name = names[i];
+            final String id = ids[i];
+            resourceButtons.add(btn);
+            btn.setOnClickListener(v -> selectResource(btn, name, id));
         }
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                categoryNames
-        );
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategory.setAdapter(categoryAdapter);
-
-        if (!categoryNames.isEmpty()) {
-            currentItems = categoryItemMap.get(categoryNames.get(0));
-            populateItemSpinner(currentItems);
+        // Set initial selection
+        if (!resourceButtons.isEmpty()) {
+            selectResource(resourceButtons.get(0), names[0], ids[0]);
         }
     }
 
-    // ---------------------------------------------------------------
-    // Populate item spinner from the current category's item list
-    // ---------------------------------------------------------------
+    private void selectResource(View v, String name, String id) {
+        selectedItemId = id;
 
-    private void populateItemSpinner(List<Map<String, String>> items) {
-        List<String> displayNames = new ArrayList<>();
-        for (Map<String, String> item : items) {
-            String unit  = item.get("unit");
-            String label = item.get("item_name");
-            if (unit != null && !unit.isEmpty()) {
-                label += " (" + unit + ")";
+        // Reset all buttons
+        for (View btn : resourceButtons) {
+            btn.setBackgroundResource(android.R.drawable.btn_default); // Placeholder
+            if (btn instanceof TextView) {
+                ((TextView) btn).setTextColor(android.graphics.Color.BLACK);
             }
-            displayNames.add(label);
         }
 
-        ArrayAdapter<String> itemAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                displayNames
-        );
-        itemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerItem.setAdapter(itemAdapter);
+        // Highlight selected (Use a distinguishable color)
+        v.setBackgroundColor(android.graphics.Color.LTGRAY);
+        if (v instanceof TextView) {
+            ((TextView) v).setTextColor(android.graphics.Color.BLUE);
+        }
+
+        Toast.makeText(this, "Selected: " + name, Toast.LENGTH_SHORT).show();
     }
+
+    private void updateQtyDisplay() {
+        tvQtyDisplay.setText(String.valueOf(currentQty));
+    }
+
+
 
     // ---------------------------------------------------------------
     // Step 2: Submit the need
@@ -223,42 +171,19 @@ public class AddNeedActivity extends AppCompatActivity {
             return;
         }
 
-        String quantityStr = editNeedQuantity.getText().toString().trim();
-
-        if (quantityStr.isEmpty()) {
-            editNeedQuantity.setError("Enter a quantity");
-            return;
-        }
-
-        int quantity;
-        try {
-            quantity = Integer.parseInt(quantityStr);
-            if (quantity <= 0) throw new NumberFormatException();
-        } catch (NumberFormatException e) {
-            editNeedQuantity.setError("Enter a valid quantity (1 or more)");
-            return;
-        }
-
-        if (currentItems == null || currentItems.isEmpty()) {
-            Toast.makeText(this, "No item selected", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        int    selectedItemPosition = spinnerItem.getSelectedItemPosition();
-        String itemId               = currentItems.get(selectedItemPosition).get("item_id");
-        String userIdStr            = Integer.toString(this.userId);
-
-        android.util.Log.d("NEED_SEND", "user_id: " + userIdStr);
-        android.util.Log.d("NEED_SEND", "item_id: " + itemId);
-        android.util.Log.d("NEED_SEND", "quantity: " + quantityStr);
+        String quantityStr = String.valueOf(currentQty);
+        String note = etNote.getText().toString().trim();
+        String unit = spinnerUnit.getSelectedItem().toString();
 
         setLoading(true);
         btnSubmitNeed.setEnabled(false);
 
         RequestBody formBody = new FormBody.Builder()
-                .add("user_id",  userIdStr)
-                .add("item_id",  itemId)
-                .add("quantity", String.valueOf(quantity))
+                .add("user_id",  String.valueOf(userId))
+                .add("item_id",  selectedItemId)
+                .add("quantity", quantityStr)
+                .add("unit",     unit)
+                .add("note",     note)
                 .build();
 
         Request request = new Request.Builder()
@@ -289,8 +214,7 @@ public class AddNeedActivity extends AppCompatActivity {
                         if ("success".equals(json.optString("status", ""))) {
                             Toast.makeText(AddNeedActivity.this,
                                     "Need submitted!", Toast.LENGTH_SHORT).show();
-                            editNeedQuantity.setText("");
-                            spinnerCategory.setSelection(0);
+                            finish(); // Close activity on success
                         } else {
                             String msg = json.optString("message", "Something went wrong.");
                             Toast.makeText(AddNeedActivity.this, msg, Toast.LENGTH_LONG).show();
@@ -304,12 +228,9 @@ public class AddNeedActivity extends AppCompatActivity {
         });
     }
 
-    // ---------------------------------------------------------------
-    // Helper: toggle loading state
-    // ---------------------------------------------------------------
-
     private void setLoading(boolean loading) {
-        progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        // No separate progress bar in this layout, could add one or use a dialog
+        // For now just toggle button state
         btnSubmitNeed.setEnabled(!loading);
     }
 }
