@@ -30,6 +30,8 @@
         <activity android:name=".MyDonations"/>
         <activity android:name=".AddNeedActivity"/>
         <activity android:name=".MatchDonateActivity"/>
+        <activity android:name=".UserProfileActivity"/>
+        <activity android:name=".ActivityHistoryActivity"/>
     </application>
 
 </manifest>

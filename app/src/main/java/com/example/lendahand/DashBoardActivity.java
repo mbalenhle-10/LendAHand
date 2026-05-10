@@ -84,20 +84,23 @@ public class DashBoardActivity extends AppCompatActivity {
         loadDashboardStats();
     }
 
-  private void setupListeners() {
+    private void setupListeners() {
 
-      btnAddDonation.setOnClickListener(v ->
-              startActivity(new Intent(this, DonateActivity.class)));
+        btnAddDonation.setOnClickListener(v ->
+                startActivity(new Intent(this, DonateActivity.class)));
 
-      btnAddNeed.setOnClickListener(v ->
-              startActivity(new Intent(this, MyNeeds.class)));
+        btnAddNeed.setOnClickListener(v ->
+                startActivity(new Intent(this, MyNeeds.class)));
 
-      btnViewMatches.setOnClickListener(v ->
-              startActivity(new Intent(this, MatchDonateActivity.class)));
+        btnViewMatches.setOnClickListener(v ->
+                startActivity(new Intent(this, MatchDonateActivity.class)));
 
-      btnMyActivity.setOnClickListener(v ->
-              startActivity(new Intent(this, MyDonations.class)));
- }
+        btnMyActivity.setOnClickListener(v ->
+                startActivity(new Intent(this, ActivityHistoryActivity.class)));
+
+        findViewById(R.id.profileImage).setOnClickListener(v ->
+                startActivity(new Intent(this, UserProfileActivity.class)));
+    }
 
     // ─────────────────────────────────────────────
     // API

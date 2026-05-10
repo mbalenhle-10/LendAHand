@@ -130,4 +130,74 @@
     <string name="qty_decrease">Decrease quantity</string>
     <string name="qty_increase">Increase quantity</string>
 
+
+
+    <!-- ACTIVITY HISTORY SCREEN -->
+    <string name="activity_title">My Activity</string>
+    <string name="activity_subtitle">Your full transaction history</string>
+    <string name="stat_donated">42kg</string>
+    <string name="stat_donated_label">Donated</string>
+    <string name="stat_people">12</string>
+    <string name="stat_people_label">Helped</string>
+    <string name="stat_items">8</string>
+    <string name="stat_items_label">Items</string>
+    <string name="tab_all">All</string>
+    <string name="tab_donated">Donated</string>
+    <string name="tab_received">Received</string>
+    <string name="date_today">TODAY</string>
+    <string name="date_yesterday">YESTERDAY</string>
+    <string name="icon_rice">🌾</string>
+    <string name="icon_blanket">🧣</string>
+    <string name="icon_oil">🫙</string>
+    <string name="icon_formula">🍼</string>
+    <string name="tx1_title">Rice donated to Nomsa K.</string>
+    <string name="tx1_sub">Matched · Soweto</string>
+    <string name="tx1_amount">+3 kg</string>
+    <string name="tx1_time">09:41 AM</string>
+    <string name="tx2_title">Blankets donated to Lerato P.</string>
+    <string name="tx2_sub">Matched · Diepkloof</string>
+    <string name="tx2_amount">+2 units</string>
+    <string name="tx2_time">08:15 AM</string>
+    <string name="tx3_title">Cooking Oil received</string>
+    <string name="tx3_sub">From Sarah · Alexandra</string>
+    <string name="tx3_amount">-2 L</string>
+    <string name="tx3_time">06:30 PM</string>
+    <string name="tx4_title">Baby Formula donated</string>
+    <string name="tx4_sub">Matched · Soweto</string>
+    <string name="tx4_amount">+2 tins</string>
+    <string name="tx4_time">02:10 PM</string>
+
+    <!-- USER PROFILE SCREEN -->
+    <string name="profile_title">My Profile</string>
+    <string name="profile_initials">TM</string>
+    <string name="profile_name">Thabo Mokoena</string>
+    <string name="profile_location">Soweto, Johannesburg</string>
+    <string name="profile_member_since">Member since Jan 2024</string>
+    <string name="profile_email">thabo@email.com</string>
+    <string name="profile_phone">+27 82 000 0000</string>
+    <string name="profile_stat1_val">42kg</string>
+    <string name="profile_stat1_label">Donated</string>
+    <string name="profile_stat2_val">12</string>
+    <string name="profile_stat2_label">Helped</string>
+    <string name="profile_stat3_val">⭐ 4.9</string>
+    <string name="profile_stat3_label">Rating</string>
+    <string name="section_personal">PERSONAL INFO</string>
+    <string name="section_badges">YOUR BADGES</string>
+    <string name="field_name">Full Name</string>
+    <string name="field_email">Email</string>
+    <string name="field_phone">Phone</string>
+    <string name="field_location">Location</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_icon">✎</string>
+    <string name="badge1_icon">🌾</string>
+    <string name="badge1_name">Food Hero</string>
+    <string name="badge1_desc">10+ food donations</string>
+    <string name="badge2_icon">🤝</string>
+    <string name="badge2_name">Community Star</string>
+    <string name="badge2_desc">Helped 10 people</string>
+    <string name="badge3_icon">⚡</string>
+    <string name="badge3_name">Quick Match</string>
+    <string name="badge3_desc">Same day delivery</string>
+    <string name="logout">Log Out</string>
+
 </resources>
