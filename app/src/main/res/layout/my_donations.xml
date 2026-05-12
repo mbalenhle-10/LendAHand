@@ -19,324 +19,106 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:baselineAligned="false"
             android:gravity="center_vertical"
-            android:baselineAligned="false">
+            android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/btnBack"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="#33FFFFFF"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back_arrow"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:baselineAligned="false">
+                android:layout_marginStart="12dp"
+                android:fontFamily="serif"
+                android:text="My Donations"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/my_donations"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:letterSpacing="0.15" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/thank_you_giving_back"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#EDEDED"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
-            <!-- ADD BUTTON -->
-            <LinearLayout
-                android:id="@+id/btnAddDonation"
+            <TextView
+                android:id="@+id/btnAddDonations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:background="#8A6F5A"
-                android:minHeight="48dp"
-                android:minWidth="48dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:gravity="center"
-                android:baselineAligned="false"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:text="+ Donation"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/plus_symbol"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_item"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginStart="4dp"/>
-            </LinearLayout>
         </LinearLayout>
 
-        <!-- STATS -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false"
-            android:layout_marginTop="20dp"
-            android:weightSum="3">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="#3D5059"
-                android:padding="12dp"
-                android:layout_marginEnd="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/two"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/available"
-                    android:textSize="11sp"
-                    android:textColor="#CDE3EA"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="#3D5059"
-                android:padding="12dp"
-                android:layout_marginEnd="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/partial"
-                    android:textSize="11sp"
-                    android:textColor="#CDE3EA"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:background="#3D5059"
-                android:padding="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/matched"
-                    android:textSize="11sp"
-                    android:textColor="#CDE3EA"/>
-            </LinearLayout>
-        </LinearLayout>
+            android:text="Tap any item to find a match"
+            android:textSize="12sp"
+            android:textColor="#CDE3EA"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="48dp"/>
     </LinearLayout>
 
-    <!-- CONTENT -->
+    <!-- LOADING SPINNER -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:visibility="visible"/>
+
+    <!-- EMPTY STATE -->
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You haven't made any donations yet."
+        android:textSize="14sp"
+        android:textColor="#8A7F78"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone"/>
+
+    <!-- DONATION CARDS — populated at runtime -->
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:clipToPadding="false"
+        android:visibility="gone">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/donationListContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/active_donations"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:textColor="#3A3A3A"
-                android:layout_marginBottom="12dp"/>
-
-            <!-- CARD 1 - Rice -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rice"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#222222"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rice_details"
-                    android:textSize="12sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/available"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#1E5631"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/zero_recipients"
-                    android:textSize="11sp"
-                    android:textColor="#555555"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
-
-            <!-- CARD 2 - Blankets -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blankets"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#222222"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/blankets_details"
-                    android:textSize="12sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/available"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#1E5631"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/zero_recipients"
-                    android:textSize="11sp"
-                    android:textColor="#555555"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
-
-            <!-- CARD 3 - Cooking Oil (IN PROGRESS) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/in_progress"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:textColor="#3A3A3A"
-                android:layout_marginBottom="12dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFFFFF"
-                android:padding="18dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cooking_oil"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#222222"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cooking_oil_details"
-                    android:textSize="12sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/partial"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#B45309"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/going_to_family"
-                    android:textSize="11sp"
-                    android:textColor="#555555"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
     </ScrollView>
 
 </LinearLayout>

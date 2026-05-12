@@ -281,8 +281,26 @@ public class DonateActivity extends AppCompatActivity {
                     try {
                         JSONObject json = new JSONObject(body);
                         if ("success".equals(json.optString("status", ""))) {
-                            Toast.makeText(DonateActivity.this,
-                                    "Donation submitted!", Toast.LENGTH_SHORT).show();
+                            // Grab the donation_id the server just created
+                            int donationId = json.optInt("donation_id", -1);
+
+                            // Grab the item the donor selected
+                            int    selectedPos = spinnerItem.getSelectedItemPosition();
+                            String itemIdStr   = currentItems.get(selectedPos).get("item_id");
+                            String itemName    = currentItems.get(selectedPos).get("item_name");
+                            String unit        = currentItems.get(selectedPos).get("unit");
+
+                            // Navigate to Match screen immediately
+                            android.content.Intent intent = new android.content.Intent(
+                                    DonateActivity.this, MatchDonateActivity.class);
+                            intent.putExtra(MatchDonateActivity.EXTRA_DONATION_ID, donationId);
+                            intent.putExtra(MatchDonateActivity.EXTRA_ITEM_ID,     Integer.parseInt(itemIdStr));
+                            intent.putExtra(MatchDonateActivity.EXTRA_ITEM_NAME,   itemName);
+                            intent.putExtra(MatchDonateActivity.EXTRA_UNIT,        unit);
+                            intent.putExtra(MatchDonateActivity.EXTRA_QUANTITY,    quantity); // int captured before the Callback
+                            startActivity(intent);
+
+                            // Reset the form for next time
                             editDonateQuantity.setText("");
                             spinnerCategory.setSelection(0);
                         } else {

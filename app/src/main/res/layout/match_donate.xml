@@ -5,7 +5,9 @@
     android:orientation="vertical"
     android:background="#F4F1EA">
 
-    <!-- HEADER -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- HEADER                                                       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,12 +29,11 @@
                 android:id="@+id/btnBack"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:orientation="horizontal"
                 android:gravity="center"
                 android:background="#33FFFFFF"
                 android:clickable="true"
-                android:focusable="true">
-
+                android:focusable="true"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,41 +59,95 @@
             android:layout_height="wrap_content"
             android:text="@string/match_donate_subtitle"
             android:textSize="12sp"
-            android:textStyle="bold"
             android:textColor="#CDE3EA"
             android:layout_marginTop="6dp"
             android:layout_marginStart="48dp"/>
 
+        <!-- Step indicator bars -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:baselineAligned="false"
             android:layout_marginTop="20dp">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:layout_weight="1"
-                android:background="#99FFFFFF"
-                android:layout_marginEnd="6dp"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:layout_weight="1"
-                android:background="#8A6F5A"
-                android:layout_marginEnd="6dp"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:layout_weight="1"
-                android:background="#33FFFFFF"/>
+            <View android:layout_width="0dp" android:layout_height="3dp"
+                android:layout_weight="1" android:background="#99FFFFFF" android:layout_marginEnd="6dp"/>
+            <View android:layout_width="0dp" android:layout_height="3dp"
+                android:layout_weight="1" android:background="#8A6F5A" android:layout_marginEnd="6dp"/>
+            <View android:layout_width="0dp" android:layout_height="3dp"
+                android:layout_weight="1" android:background="#33FFFFFF"/>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- SCROLLABLE CONTENT -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ITEM SUMMARY CARD (what the donor is giving away)           -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:gravity="center_vertical"
+        android:baselineAligned="false">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DONATING"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#8A7F78"
+            android:letterSpacing="0.15"/>
+
+        <TextView
+            android:id="@+id/tvItemSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#2F3E46"/>
+    </LinearLayout>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ALLOCATION PROGRESS BAR                                      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="14dp">
+
+        <ProgressBar
+            android:id="@+id/progressAllocation"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#8A6F5A"
+            android:progressBackgroundTint="#E2DDD8"/>
+
+        <TextView
+            android:id="@+id/tvAllocProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 allocated"
+            android:textSize="12sp"
+            android:textColor="#8A7F78"
+            android:layout_marginTop="6dp"/>
+    </LinearLayout>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SCROLLABLE CONTENT                                           -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -105,71 +160,50 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- RESOURCE GRID -->
-            <include layout="@layout/section_resource_grid"/>
+            <!-- SECTION LABEL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PEOPLE WHO NEED THIS"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#8A7F78"
+                android:letterSpacing="0.15"
+                android:layout_marginBottom="12dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E2DDD8"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- ALLOCATION PROGRESS -->
-            <include layout="@layout/section_alloc_progress"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E2DDD8"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- PEOPLE WHO NEED -->
+            <!-- Recipient cards injected here at runtime -->
             <LinearLayout
+                android:id="@+id/recipientContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:baselineAligned="false"
-                android:layout_marginBottom="10dp">
+                android:orientation="vertical"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/people_who_need"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#8A7F78"
-                    android:letterSpacing="0.15"/>
+            <!-- Shown when no open requests exist for this item -->
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No one needs this item right now.
+Your donation has been saved — check My Donations later to try matching again."
+                android:textSize="14sp"
+                android:textColor="#8A7F78"
+                android:gravity="center"
+                android:padding="24dp"
+                android:visibility="gone"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nearby_count"
-                    android:textSize="11sp"
-                    android:textColor="#8A7F78"
-                    android:background="#FFFFFF"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"/>
-            </LinearLayout>
-
-            <!-- RECIPIENT CARDS -->
-            <include layout="@layout/card_recepient_1"/>
-            <include layout="@layout/card_recepient_2"/>
-            <include layout="@layout/card_recepient_3"/>
+            <!-- DIVIDER -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#E2DDD8"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="20dp"/>
 
             <!-- NOTE -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/additional_note"
+                android:text="ADDITIONAL NOTE (OPTIONAL)"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#8A7F78"

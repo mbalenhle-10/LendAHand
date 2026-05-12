@@ -87,7 +87,7 @@ public class DashBoardActivity extends AppCompatActivity {
     private void setupListeners() {
 
         btnAddDonation.setOnClickListener(v ->
-                startActivity(new Intent(this, DonateActivity.class)));
+                startActivity(new Intent(this, MyDonationsActivity.class)));
 
         btnAddNeed.setOnClickListener(v ->
                 startActivity(new Intent(this, MyNeeds.class)));
