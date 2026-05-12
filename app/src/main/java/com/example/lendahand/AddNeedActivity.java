@@ -1,10 +1,14 @@
 package com.example.lendahand;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,22 +36,30 @@ public class AddNeedActivity extends AppCompatActivity {
 
     private static final String BASE_URL = "http://13.135.14.204/api/auth/";
 
-    // Views
-    private View        btnSubmitNeed;
-    private TextView    tvQtyDisplay;
-    private View        btnQtyPlus;
-    private View        btnQtyMinus;
-    private Spinner     spinnerUnit;
-    private EditText    etNote;
-    private View        btnBack;
+    // ---------------------------------------------------------------
+    // Data — loaded from items.php
+    //   categoryMap : category_name → list of items
+    //   Each item map has keys: item_id, item_name, unit
+    // ---------------------------------------------------------------
+    private final LinkedHashMap<String, List<Map<String, String>>> categoryMap = new LinkedHashMap<>();
 
-    private int currentQty = 2;
-    private String selectedItemId = "1"; // Default to Rice
-    private final List<View> resourceButtons = new ArrayList<>();
+    // Views
+    private LinearLayout categoryTabsContainer;
+    private LinearLayout itemGridContainer;
+    private TextView     tvQtyDisplay;
+    private View         btnQtyPlus;
+    private View         btnQtyMinus;
+    private EditText     etNote;
+    private View         btnSubmitNeed;
+    private View         btnBack;
+
+    // Selection state
+    private int    currentQty      = 1;
+    private String selectedItemId  = null;
+    private View   selectedTab     = null;
+    private View   selectedPanel   = null;
 
     private final OkHttpClient httpClient = new OkHttpClient();
-
-    // Session
     private SharedPreferences prefs;
     private int userId;
 
@@ -62,107 +74,292 @@ public class AddNeedActivity extends AppCompatActivity {
 
         initSession();
         bindViews();
-        setupListeners();
+        fetchItems();
     }
-
-    // ---------------------------------------------------------------
-    // Session
-    // ---------------------------------------------------------------
 
     private void initSession() {
         prefs  = getSharedPreferences(MainActivity.PREFS_NAME, MODE_PRIVATE);
         userId = prefs.getInt("user_id", -1);
     }
 
-    // ---------------------------------------------------------------
-    // View binding
-    // ---------------------------------------------------------------
-
     private void bindViews() {
-        btnSubmitNeed    = findViewById(R.id.btnSubmitNeed);
-        tvQtyDisplay     = findViewById(R.id.tvQtyDisplay);
-        btnQtyPlus       = findViewById(R.id.btnQtyPlus);
-        btnQtyMinus      = findViewById(R.id.btnQtyMinus);
-        spinnerUnit      = findViewById(R.id.spinnerUnit);
-        etNote           = findViewById(R.id.etNote);
-        btnBack          = findViewById(R.id.btnBack);
-    }
+        categoryTabsContainer = findViewById(R.id.categoryTabsContainer);
+        itemGridContainer     = findViewById(R.id.itemGridContainer);
+        tvQtyDisplay          = findViewById(R.id.tvQtyDisplay);
+        btnQtyPlus            = findViewById(R.id.btnQtyPlus);
+        btnQtyMinus           = findViewById(R.id.btnQtyMinus);
+        etNote                = findViewById(R.id.etNote);
+        btnSubmitNeed         = findViewById(R.id.btnSubmitNeed);
+        btnBack               = findViewById(R.id.btnBack);
 
-    private void setupListeners() {
-        btnQtyPlus.setOnClickListener(v -> {
-            currentQty++;
-            updateQtyDisplay();
-        });
-
-        btnQtyMinus.setOnClickListener(v -> {
-            if (currentQty > 1) {
-                currentQty--;
-                updateQtyDisplay();
-            }
-        });
-
+        btnSubmitNeed.setEnabled(false);
         btnBack.setOnClickListener(v -> finish());
+
+        btnQtyPlus.setOnClickListener(v  -> { currentQty++; refreshQtyDisplay(); });
+        btnQtyMinus.setOnClickListener(v -> {
+            if (currentQty > 1) { currentQty--; refreshQtyDisplay(); }
+        });
+
         btnSubmitNeed.setOnClickListener(v -> submitNeed());
+    }
 
-        // Setup individual resource buttons (Grid in XML)
-        int[] resIds = {
-                R.id.btnRice, R.id.btnMaize, R.id.btnCookingOil, R.id.btnBlankets,
-                R.id.btnClothingAdults, R.id.btnClothingChildren, R.id.btnStationery,
-                R.id.btnSanitary, R.id.btnCanned, R.id.btnBabyFormula
-        };
-        String[] names = {
-                "Rice", "Maize Meal", "Cooking Oil", "Blankets",
-                "Clothing (Adults)", "Clothing (Children)", "School Stationery",
-                "Sanitary Products", "Canned Goods", "Baby Formula"
-        };
-        String[] ids = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    // ---------------------------------------------------------------
+    // Step 1 — Fetch items from server
+    // ---------------------------------------------------------------
 
-        for (int i = 0; i < resIds.length; i++) {
-            final View btn = findViewById(resIds[i]);
-            if (btn == null) continue;
-            final String name = names[i];
-            final String id = ids[i];
-            resourceButtons.add(btn);
-            btn.setOnClickListener(v -> selectResource(btn, name, id));
-        }
+    private void fetchItems() {
+        Request request = new Request.Builder()
+                .url(BASE_URL + "items.php")
+                .get()
+                .build();
 
-        // Set initial selection
-        if (!resourceButtons.isEmpty()) {
-            selectResource(resourceButtons.get(0), names[0], ids[0]);
+        httpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() ->
+                        Toast.makeText(AddNeedActivity.this,
+                                "Could not load items. Check your connection.",
+                                Toast.LENGTH_LONG).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String body = response.body() != null ? response.body().string() : "[]";
+                runOnUiThread(() -> {
+                    try {
+                        parseCategoryMap(new JSONArray(body));
+                        buildCategoryTabs();
+                        btnSubmitNeed.setEnabled(true);
+                    } catch (JSONException e) {
+                        Toast.makeText(AddNeedActivity.this,
+                                "Unexpected server response.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * Parse the flat item list from items.php into:
+     *   categoryMap { "Food" → [ {item_id, item_name, unit}, … ], "Clothing" → […] }
+     *
+     * Expects each JSON object to have: item_id, item_name, unit, category
+     * (same structure the original DonateActivity used)
+     */
+    private void parseCategoryMap(JSONArray array) throws JSONException {
+        categoryMap.clear();
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject obj   = array.getJSONObject(i);
+            String category  = obj.getString("category");
+            String itemId    = obj.getString("item_id");
+            String itemName  = obj.getString("item_name");
+            String unit      = obj.optString("unit", "");
+
+            if (!categoryMap.containsKey(category)) {
+                categoryMap.put(category, new ArrayList<>());
+            }
+
+            Map<String, String> item = new LinkedHashMap<>();
+            item.put("item_id",   itemId);
+            item.put("item_name", itemName);
+            item.put("unit",      unit);
+            categoryMap.get(category).add(item);
         }
     }
 
-    private void selectResource(View v, String name, String id) {
-        selectedItemId = id;
+    // ---------------------------------------------------------------
+    // Step 2 — Build category tabs and show first category's items
+    // ---------------------------------------------------------------
 
-        // Reset all buttons
-        for (View btn : resourceButtons) {
-            btn.setBackgroundResource(android.R.drawable.btn_default); // Placeholder
-            if (btn instanceof TextView) {
-                ((TextView) btn).setTextColor(android.graphics.Color.BLACK);
+    private void buildCategoryTabs() {
+        categoryTabsContainer.removeAllViews();
+
+        boolean isFirst = true;
+        for (String category : categoryMap.keySet()) {
+            TextView tab = makeCategoryTab(category);
+            categoryTabsContainer.addView(tab);
+
+            if (isFirst) {
+                selectCategory(tab, category);
+                isFirst = false;
+            }
+        }
+    }
+
+    private TextView makeCategoryTab(String category) {
+        TextView tab = new TextView(this);
+        tab.setText(category);
+        tab.setTextSize(13f);
+        tab.setTypeface(null, Typeface.BOLD);
+        tab.setTextColor(Color.parseColor("#AACDD8"));
+
+        int hPad = dp(16);
+        int vPad = dp(8);
+        tab.setPadding(hPad, vPad, hPad, vPad);
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMarginEnd(dp(8));
+        tab.setLayoutParams(lp);
+
+        tab.setOnClickListener(v -> selectCategory(tab, category));
+        return tab;
+    }
+
+    // ---------------------------------------------------------------
+    // Step 3 — On category tap: highlight tab, repopulate item grid
+    // ---------------------------------------------------------------
+
+    private void selectCategory(TextView selected, String category) {
+        // Reset all tabs
+        for (int i = 0; i < categoryTabsContainer.getChildCount(); i++) {
+            View child = categoryTabsContainer.getChildAt(i);
+            if (child instanceof TextView) {
+                child.setBackgroundColor(Color.TRANSPARENT);
+                ((TextView) child).setTextColor(Color.parseColor("#AACDD8"));
             }
         }
 
-        // Highlight selected (Use a distinguishable color)
-        v.setBackgroundColor(android.graphics.Color.LTGRAY);
-        if (v instanceof TextView) {
-            ((TextView) v).setTextColor(android.graphics.Color.BLUE);
-        }
+        // Highlight selected tab
+        selected.setBackgroundColor(Color.parseColor("#8A6F5A"));
+        selected.setTextColor(Color.WHITE);
+        selectedTab = selected;
 
-        Toast.makeText(this, "Selected: " + name, Toast.LENGTH_SHORT).show();
+        // Clear previous item selection when switching categories
+        selectedItemId = null;
+        selectedPanel  = null;
+
+        // Repopulate items
+        buildItemGrid(categoryMap.get(category));
     }
 
-    private void updateQtyDisplay() {
+    // ---------------------------------------------------------------
+    // Step 4 — Build item panels in a 2-column grid
+    // ---------------------------------------------------------------
+
+    private void buildItemGrid(List<Map<String, String>> items) {
+        itemGridContainer.removeAllViews();
+
+        // Build rows of 2
+        for (int i = 0; i < items.size(); i += 2) {
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setBaselineAligned(false);
+
+            LinearLayout.LayoutParams rowLp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            rowLp.bottomMargin = dp(8);
+            row.setLayoutParams(rowLp);
+
+            // Left panel
+            row.addView(makeItemPanel(items.get(i), true));
+
+            // Right panel (may not exist for the last odd item)
+            if (i + 1 < items.size()) {
+                row.addView(makeItemPanel(items.get(i + 1), false));
+            } else {
+                // Empty spacer so left panel stays half-width
+                View spacer = new View(this);
+                LinearLayout.LayoutParams sp = new LinearLayout.LayoutParams(0,
+                        ViewGroup.LayoutParams.MATCH_PARENT, 1f);
+                sp.setMarginStart(dp(8));
+                spacer.setLayoutParams(sp);
+                row.addView(spacer);
+            }
+
+            itemGridContainer.addView(row);
+        }
+    }
+
+    private LinearLayout makeItemPanel(Map<String, String> item, boolean isLeft) {
+        String itemId   = item.get("item_id");
+        String itemName = item.get("item_name");
+        String unit     = item.get("unit");
+
+        // Outer panel (LinearLayout so it holds two TextViews)
+        LinearLayout panel = new LinearLayout(this);
+        panel.setOrientation(LinearLayout.VERTICAL);
+        panel.setBackgroundColor(Color.WHITE);
+        panel.setPadding(dp(12), dp(12), dp(12), dp(12));
+        panel.setClickable(true);
+        panel.setFocusable(true);
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,
+                ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+        if (isLeft) lp.setMarginEnd(dp(8));
+        panel.setLayoutParams(lp);
+
+        // Item name
+        TextView tvName = new TextView(this);
+        tvName.setText(itemName);
+        tvName.setTextSize(13f);
+        tvName.setTypeface(null, Typeface.BOLD);
+        tvName.setTextColor(Color.parseColor("#1A1A1A"));
+        panel.addView(tvName);
+
+        // Unit label (smaller, grey)
+        if (unit != null && !unit.isEmpty()) {
+            TextView tvUnit = new TextView(this);
+            tvUnit.setText(unit);
+            tvUnit.setTextSize(11f);
+            tvUnit.setTextColor(Color.parseColor("#8A8A8A"));
+            LinearLayout.LayoutParams unitLp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            unitLp.topMargin = dp(2);
+            tvUnit.setLayoutParams(unitLp);
+            panel.addView(tvUnit);
+        }
+
+        panel.setOnClickListener(v -> selectItem(panel, itemId, itemName));
+        return panel;
+    }
+
+    // ---------------------------------------------------------------
+    // Step 5 — On item tap: highlight panel, store item_id
+    // ---------------------------------------------------------------
+
+    private void selectItem(LinearLayout selected, String itemId, String itemName) {
+        // Reset previously selected panel
+        if (selectedPanel instanceof LinearLayout) {
+            selectedPanel.setBackgroundColor(Color.WHITE);
+            tintPanelText((LinearLayout) selectedPanel,
+                    Color.parseColor("#1A1A1A"), Color.parseColor("#8A8A8A"));
+        }
+
+        // Apply selected style
+        selected.setBackgroundColor(Color.parseColor("#2F3E46"));
+        tintPanelText(selected, Color.WHITE, Color.parseColor("#AACDD8"));
+
+        selectedPanel  = selected;
+        selectedItemId = itemId;
+
+        android.util.Log.d("NEED_SELECT", "item=" + itemName + " id=" + itemId);
+    }
+
+    /** Tints the name (first child) and unit (second child) of a panel. */
+    private void tintPanelText(LinearLayout panel, int nameColor, int unitColor) {
+        for (int i = 0; i < panel.getChildCount(); i++) {
+            View child = panel.getChildAt(i);
+            if (child instanceof TextView) {
+                ((TextView) child).setTextColor(i == 0 ? nameColor : unitColor);
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------
+    // Quantity display
+    // ---------------------------------------------------------------
+
+    private void refreshQtyDisplay() {
         tvQtyDisplay.setText(String.valueOf(currentQty));
     }
 
-
-
     // ---------------------------------------------------------------
-    // Step 2: Submit the need
-    //
-    //  POST /api/auth/need.php
-    //  Body (form): user_id, item_id, quantity
+    // Submit
+    //   POST /api/auth/need.php — user_id, item_id, quantity, note
     // ---------------------------------------------------------------
 
     private void submitNeed() {
@@ -170,19 +367,22 @@ public class AddNeedActivity extends AppCompatActivity {
             Toast.makeText(this, "Session expired. Please log in again.", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (selectedItemId == null) {
+            Toast.makeText(this, "Please select an item first.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        String quantityStr = String.valueOf(currentQty);
         String note = etNote.getText().toString().trim();
-        String unit = spinnerUnit.getSelectedItem().toString();
+
+        android.util.Log.d("NEED_SEND",
+                "user_id=" + userId + " item_id=" + selectedItemId + " qty=" + currentQty);
 
         setLoading(true);
-        btnSubmitNeed.setEnabled(false);
 
         RequestBody formBody = new FormBody.Builder()
                 .add("user_id",  String.valueOf(userId))
                 .add("item_id",  selectedItemId)
-                .add("quantity", quantityStr)
-                .add("unit",     unit)
+                .add("quantity", String.valueOf(currentQty))
                 .add("note",     note)
                 .build();
 
@@ -196,7 +396,6 @@ public class AddNeedActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(() -> {
                     setLoading(false);
-                    btnSubmitNeed.setEnabled(true);
                     Toast.makeText(AddNeedActivity.this,
                             "Submission failed. Try again.", Toast.LENGTH_SHORT).show();
                 });
@@ -208,13 +407,12 @@ public class AddNeedActivity extends AppCompatActivity {
                 android.util.Log.d("NEED_RESPONSE", body);
                 runOnUiThread(() -> {
                     setLoading(false);
-                    btnSubmitNeed.setEnabled(true);
                     try {
                         JSONObject json = new JSONObject(body);
                         if ("success".equals(json.optString("status", ""))) {
                             Toast.makeText(AddNeedActivity.this,
                                     "Need submitted!", Toast.LENGTH_SHORT).show();
-                            finish(); // Close activity on success
+                            finish();
                         } else {
                             String msg = json.optString("message", "Something went wrong.");
                             Toast.makeText(AddNeedActivity.this, msg, Toast.LENGTH_LONG).show();
@@ -228,10 +426,18 @@ public class AddNeedActivity extends AppCompatActivity {
         });
     }
 
+    // ---------------------------------------------------------------
+    // Helpers
+    // ---------------------------------------------------------------
+
     private void setLoading(boolean loading) {
-        // No separate progress bar in this layout, could add one or use a dialog
-        // For now just toggle button state
         btnSubmitNeed.setEnabled(!loading);
     }
-}
 
+    /** Converts dp to pixels for the current display. */
+    private int dp(int dp) {
+        return Math.round(TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics()));
+    }
+}

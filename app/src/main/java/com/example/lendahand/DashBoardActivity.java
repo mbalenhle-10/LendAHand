@@ -98,8 +98,8 @@ public class DashBoardActivity extends AppCompatActivity {
         btnMyActivity.setOnClickListener(v ->
                 startActivity(new Intent(this, ActivityHistoryActivity.class)));
 
-        findViewById(R.id.profileImage).setOnClickListener(v ->
-                startActivity(new Intent(this, UserProfileActivity.class)));
+       // findViewById(R.id.profileImage).setOnClickListener(v ->
+          //      startActivity(new Intent(this, UserProfileActivity.class)));
     }
 
     // ─────────────────────────────────────────────

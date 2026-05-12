@@ -5,7 +5,9 @@
     android:orientation="vertical"
     android:background="#F4F1EA">
 
-    <!-- HEADER -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- HEADER                                                       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,12 +63,11 @@
             android:layout_height="wrap_content"
             android:text="@string/add_need_subtitle"
             android:textSize="13sp"
-            android:textStyle="bold"
             android:textColor="#CDE3EA"
             android:layout_marginTop="6dp"
             android:layout_marginStart="60dp"/>
 
-        <!-- PROGRESS BARS -->
+        <!-- STEP PROGRESS BARS -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,7 +97,29 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- SCROLLABLE CONTENT -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- CATEGORY TABS — horizontal scroll, populated from API       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2F3E46"
+        android:scrollbars="none"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:id="@+id/categoryTabsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+    </HorizontalScrollView>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SCROLLABLE CONTENT                                           -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -109,296 +132,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- SECTION: CHOOSE RESOURCE -->
+            <!-- SECTION LABEL -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/choose_resource"
-                android:textSize="12sp"
+                android:text="SELECT ITEM"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#5A524A"
                 android:letterSpacing="0.15"
                 android:layout_marginBottom="10dp"/>
 
-            <!-- RESOURCE GRID ROW 1 -->
+            <!-- ITEM PANELS — populated dynamically from API -->
             <LinearLayout
+                android:id="@+id/itemGridContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:id="@+id/btnRice"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/rice">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rice"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnMaize"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#EEF3F5"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/maize_meal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/maize_meal"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#2F3E46"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- RESOURCE GRID ROW 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:id="@+id/btnCookingOil"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/cooking_oil">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cooking_oil"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnBlankets"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/blankets">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/blankets"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- RESOURCE GRID ROW 3 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:id="@+id/btnClothingAdults"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/clothing_adults">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/clothing_adults"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnClothingChildren"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/clothing_children">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/clothing_children"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- RESOURCE GRID ROW 4 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:id="@+id/btnStationery"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/school_stationery">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/school_stationery"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnSanitary"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/sanitary_products">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sanitary_products"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- RESOURCE GRID ROW 5 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="20dp">
-
-                <LinearLayout
-                    android:id="@+id/btnCanned"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/canned_goods">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/canned_goods"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnBabyFormula"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="@string/baby_formula">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/baby_formula"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"/>
-                </LinearLayout>
-            </LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"/>
 
             <!-- DIVIDER -->
             <View
@@ -407,23 +158,22 @@
                 android:background="#E2DDD8"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- SECTION: QUANTITY -->
+            <!-- ─── QUANTITY ─────────────────────────────────────── -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/quantity_needed"
-                android:textSize="12sp"
+                android:text="QUANTITY NEEDED"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#5A524A"
                 android:letterSpacing="0.15"
                 android:layout_marginBottom="10dp"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:baselineAligned="false"
                 android:layout_marginBottom="20dp">
 
                 <TextView
@@ -466,32 +216,6 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:contentDescription="@string/qty_increase"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="#FFFFFF"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:layout_marginStart="12dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/unit_label"
-                        android:textSize="13sp"
-                        android:textColor="#5A524A"/>
-
-                    <Spinner
-                        android:id="@+id/spinnerUnit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:entries="@array/unit_options"
-                        android:backgroundTint="#2F3E46"/>
-                </LinearLayout>
             </LinearLayout>
 
             <!-- DIVIDER -->
@@ -501,82 +225,12 @@
                 android:background="#E2DDD8"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- SECTION: URGENCY -->
+            <!-- ─── NOTE ─────────────────────────────────────────── -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/urgency_level"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#5A524A"
-                android:letterSpacing="0.15"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:id="@+id/btnUrgencyLow"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/urgency_low"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="#1E5631"
-                    android:background="#EAF3DE"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnUrgencyMed"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/urgency_medium"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="#B45309"
-                    android:background="#FEF3C7"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnUrgencyHigh"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/urgency_high"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="#991B1B"
-                    android:background="#FEE2E2"
-                    android:clickable="true"
-                    android:focusable="true"/>
-            </LinearLayout>
-
-            <!-- DIVIDER -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E2DDD8"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- SECTION: NOTE -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/additional_note"
-                android:textSize="12sp"
+                android:text="ADDITIONAL NOTE (OPTIONAL)"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#5A524A"
                 android:letterSpacing="0.15"
@@ -598,7 +252,7 @@
                 android:autofillHints="no"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- SUBMIT BUTTON -->
+            <!-- SUBMIT -->
             <LinearLayout
                 android:id="@+id/btnSubmitNeed"
                 android:layout_width="match_parent"
