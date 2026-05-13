@@ -67,21 +67,21 @@
                     android:id="@+id/txtDonationCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="0"
                     android:textColor="#6B4F3F"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="120dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="18dp"
                 android:background="#FFFFFF"
-                android:layout_marginStart="8dp">
+                android:orientation="vertical"
+                android:padding="18dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,20 +94,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="Requests for help"
                     android:textColor="#4E4A45"
-                    android:textSize="13sp"
-                    android:layout_marginTop="8dp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/txtNeedCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="0"
                     android:textColor="#6B4F3F"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp" />
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
@@ -238,7 +238,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="View Matches"
+                        android:text="User Profile"
                         android:textSize="15sp"
                         android:textColor="#FFFFFF"
                         android:layout_marginTop="8dp"

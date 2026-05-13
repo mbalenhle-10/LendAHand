@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#F4F1EA">
 
-    <!-- HEADER -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:paddingTop="32dp"
         android:paddingBottom="24dp">
 
-        <!-- BACK + EDIT ROW -->
+        <!-- BACK + TITLE + EDIT -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +35,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:contentDescription="@string/back_arrow">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +65,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:contentDescription="@string/edit_profile">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,12 +88,11 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:background="#8A6F5A">
-
                 <TextView
                     android:id="@+id/tvAvatarInitials"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_initials"
+                    android:text="?"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"/>
@@ -112,31 +109,14 @@
                     android:id="@+id/tvProfileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_name"
+                    android:text="Loading…"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_location"
-                    android:textSize="13sp"
-                    android:textColor="#CDE3EA"
-                    android:layout_marginTop="2dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_member_since"
-                    android:textSize="12sp"
-                    android:textColor="#CDE3EA"
-                    android:layout_marginTop="2dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- IMPACT STATS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -147,6 +127,7 @@
         android:paddingBottom="20dp"
         android:baselineAligned="false">
 
+        <!-- Items Donated -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -158,9 +139,10 @@
             android:layout_marginEnd="6dp">
 
             <TextView
+                android:id="@+id/tvStatDonated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_stat1_val"
+                android:text="—"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
@@ -168,11 +150,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_stat1_label"
+                android:text="Donated"
                 android:textSize="11sp"
                 android:textColor="#CDE3EA"/>
         </LinearLayout>
 
+        <!-- Items Received -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -184,9 +167,10 @@
             android:layout_marginEnd="6dp">
 
             <TextView
+                android:id="@+id/tvStatReceived"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_stat2_val"
+                android:text="—"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
@@ -194,11 +178,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_stat2_label"
+                android:text="Received"
                 android:textSize="11sp"
                 android:textColor="#CDE3EA"/>
         </LinearLayout>
 
+        <!-- Matches Made -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -209,9 +194,10 @@
             android:padding="12dp">
 
             <TextView
+                android:id="@+id/tvStatMatches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_stat3_val"
+                android:text="—"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
@@ -219,13 +205,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_stat3_label"
+                android:text="Matches"
                 android:textSize="11sp"
                 android:textColor="#CDE3EA"/>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- SCROLLABLE CONTENT -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -238,18 +224,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- SECTION: PERSONAL INFO -->
+            <!-- PERSONAL INFO -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/section_personal"
-                android:textSize="12sp"
+                android:text="PERSONAL INFO"
+                android:textSize="11sp"
                 android:textStyle="bold"
                 android:textColor="#5A524A"
                 android:letterSpacing="0.15"
                 android:layout_marginBottom="10dp"/>
 
-            <!-- NAME ROW -->
+            <!-- Full Name -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -259,26 +245,24 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="2dp"
                 android:baselineAligned="false">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/field_name"
+                    android:text="Full Name"
                     android:textSize="13sp"
                     android:textColor="#5A524A"/>
-
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_name"
+                    android:text="—"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="#1A1A1A"/>
             </LinearLayout>
 
-            <!-- EMAIL ROW -->
+            <!-- Email -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -288,26 +272,24 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="2dp"
                 android:baselineAligned="false">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/field_email"
+                    android:text="Email"
                     android:textSize="13sp"
                     android:textColor="#5A524A"/>
-
                 <TextView
                     android:id="@+id/tvEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_email"
+                    android:text="—"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="#1A1A1A"/>
             </LinearLayout>
 
-            <!-- PHONE ROW -->
+            <!-- Phone -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -317,51 +299,44 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="2dp"
                 android:baselineAligned="false">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/field_phone"
+                    android:text="Phone"
                     android:textSize="13sp"
                     android:textColor="#5A524A"/>
-
                 <TextView
                     android:id="@+id/tvPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_phone"
+                    android:text="—"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="#1A1A1A"/>
             </LinearLayout>
 
-            <!-- LOCATION ROW -->
+            <!-- Bio — taller row, left-aligned value -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="#FFFFFF"
                 android:padding="14dp"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp"
-                android:baselineAligned="false">
-
+                android:layout_marginBottom="20dp">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/field_location"
-                    android:textSize="13sp"
-                    android:textColor="#5A524A"/>
-
-                <TextView
-                    android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_location"
+                    android:text="Bio"
                     android:textSize="13sp"
-                    android:textStyle="bold"
+                    android:textColor="#5A524A"
+                    android:layout_marginBottom="6dp"/>
+                <TextView
+                    android:id="@+id/tvBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="—"
+                    android:textSize="13sp"
                     android:textColor="#1A1A1A"/>
             </LinearLayout>
 
@@ -372,143 +347,7 @@
                 android:background="#E2DDD8"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- SECTION: BADGES -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/section_badges"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#5A524A"
-                android:letterSpacing="0.15"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false"
-                android:layout_marginBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#FFFFFF"
-                    android:padding="14dp"
-                    android:layout_marginEnd="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge1_icon"
-                        android:textSize="28sp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge1_name"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge1_desc"
-                        android:textSize="11sp"
-                        android:textColor="#5A524A"
-                        android:gravity="center"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#FFFFFF"
-                    android:padding="14dp"
-                    android:layout_marginEnd="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge2_icon"
-                        android:textSize="28sp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge2_name"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge2_desc"
-                        android:textSize="11sp"
-                        android:textColor="#5A524A"
-                        android:gravity="center"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="#FFFFFF"
-                    android:padding="14dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge3_icon"
-                        android:textSize="28sp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge3_name"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="#1A1A1A"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/badge3_desc"
-                        android:textSize="11sp"
-                        android:textColor="#5A524A"
-                        android:gravity="center"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- DIVIDER -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E2DDD8"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- LOGOUT BUTTON -->
+            <!-- LOGOUT  -->
             <LinearLayout
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
@@ -520,7 +359,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginBottom="8dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
