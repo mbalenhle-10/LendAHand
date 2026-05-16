@@ -23,7 +23,7 @@ import okhttp3.Response;
 public class ActivityHistoryActivity extends AppCompatActivity {
 
     // Centralized URL management
-    private static final String BASE_URL = "http://13.135.14.204/api/auth/";
+    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/s2562712/api/";
     private static final String SCRIPT_NAME = "activity_history.php";
 
     private final OkHttpClient client = new OkHttpClient();

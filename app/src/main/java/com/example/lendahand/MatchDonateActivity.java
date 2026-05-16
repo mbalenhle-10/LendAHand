@@ -36,7 +36,7 @@ import okhttp3.Response;
 
 public class MatchDonateActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "http://13.135.14.204/api/auth/";
+    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/s2562712/api/";
 
     // ---------------------------------------------------------------
     // Intent extras — passed in from DonateActivity on success

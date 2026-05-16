@@ -21,7 +21,7 @@ public class TopDonorsActivity extends AppCompatActivity {
     private ArrayList<String> donorsList;
 
     private final String BASEURL =
-            "http://13.135.14.204/api/auth/";
+            "https://wmc.ms.wits.ac.za/students/s2562712/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

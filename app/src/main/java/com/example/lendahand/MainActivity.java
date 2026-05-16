@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Button signInButton;
     TextView createAccountText;
 
-    String loginUrl = "http://13.135.14.204/api/auth/login.php";
+    String loginUrl = "https://wmc.ms.wits.ac.za/students/s2562712/api/login.php";
 
     // SharedPreferences key — one constant used across the whole app
     public static final String PREFS_NAME = "LendAHandSession";
