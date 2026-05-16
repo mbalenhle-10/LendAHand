@@ -12,7 +12,6 @@
         android:padding="24dp">
 
         <!-- Welcome -->
-
         <TextView
             android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
             android:textSize="16sp"
             android:layout_marginTop="6dp" />
 
-        <!-- Overview Cards -->
+        <!-- Row 1: Stats -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,21 +66,21 @@
                     android:id="@+id/txtDonationCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="0"
                     android:textColor="#6B4F3F"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="120dp"
-                android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="18dp"
+                android:background="#FFFFFF"
+                android:layout_marginStart="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,188 +93,194 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="Requests for help"
                     android:textColor="#4E4A45"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:layout_marginTop="8dp" />
 
                 <TextView
                     android:id="@+id/txtNeedCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:text="0"
                     android:textColor="#6B4F3F"
                     android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Row 2: Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="18dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/btnAddDonation"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#8A6F5A"
+                android:padding="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="30sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Donation"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnAddNeed"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#6E7F80"
+                android:padding="16dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="30sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Need"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="8dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Quick Actions -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quick Actions"
-            android:textColor="#2B2B2B"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginTop="34dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add, request, match, and manage your activity."
-            android:textColor="#5F5A55"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
-
-        <!-- Quick Action Boxes -->
+        <!-- Row 3: Profile + Top Donors -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/btnViewMatches"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#9A7B4F"
+                android:padding="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="↔"
+                    android:textSize="28sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Profile"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnTopDonors"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#7A5C58"
+                android:padding="16dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="★"
+                    android:textSize="28sp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Donors"
+                    android:textSize="15sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Row 4: My Activity -->
+        <LinearLayout
+            android:id="@+id/btnMyActivity"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
-            android:layout_marginTop="18dp">
+            android:background="#5C6B73"
+            android:padding="16dp"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
-            <!-- Row 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:text="☰"
+                android:textSize="28sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:id="@+id/btnAddDonation"
-                    android:layout_width="0dp"
-                    android:layout_height="140dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:background="#8A6F5A"
-                    android:padding="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+"
-                        android:textSize="30sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add Donation"
-                        android:textSize="15sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginTop="8dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnAddNeed"
-                    android:layout_width="0dp"
-                    android:layout_height="140dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:background="#6E7F80"
-                    android:padding="16dp"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+"
-                        android:textSize="30sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add Need"
-                        android:textSize="15sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginTop="8dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Row 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:id="@+id/btnViewMatches"
-                    android:layout_width="0dp"
-                    android:layout_height="140dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:background="#9A7B4F"
-                    android:padding="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="↔"
-                        android:textSize="28sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="User Profile"
-                        android:textSize="15sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginTop="8dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btnMyActivity"
-                    android:layout_width="0dp"
-                    android:layout_height="140dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:background="#5C6B73"
-                    android:padding="16dp"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="☰"
-                        android:textSize="28sp"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Activity"
-                        android:textSize="15sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginTop="8dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
+                android:text="My Activity"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Bottom Info -->
@@ -291,16 +296,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small help, big impact"
-                android:textColor="#2B2B2B"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#2B2B2B" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Share what you have, request what you need, and connect with people around you."
-                android:textColor="#4E4A45"
                 android:textSize="14sp"
+                android:textColor="#4E4A45"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
 

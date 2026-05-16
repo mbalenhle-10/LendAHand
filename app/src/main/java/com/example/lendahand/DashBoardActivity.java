@@ -25,7 +25,7 @@ public class DashBoardActivity extends AppCompatActivity {
     private TextView welcomeText;
     private TextView donationCount, needCount;
 
-    private LinearLayout btnAddDonation, btnAddNeed, btnUserProfile, btnMyActivity;
+    private LinearLayout btnAddDonation, btnAddNeed, btnUserProfile, btnMyActivity, btnTopDonors;
 
     // Session
     private SharedPreferences prefs;
@@ -77,6 +77,7 @@ public class DashBoardActivity extends AppCompatActivity {
         btnAddNeed     = findViewById(R.id.btnAddNeed);
         btnUserProfile = findViewById(R.id.btnViewMatches);
         btnMyActivity  = findViewById(R.id.btnMyActivity);
+        btnTopDonors   = findViewById(R.id.btnTopDonors);
     }
 
     private void setupUI() {
@@ -98,8 +99,8 @@ public class DashBoardActivity extends AppCompatActivity {
         btnMyActivity.setOnClickListener(v ->
                 startActivity(new Intent(this, ActivityHistoryActivity.class)));
 
-       // findViewById(R.id.profileImage).setOnClickListener(v ->
-          //      startActivity(new Intent(this, UserProfileActivity.class)));
+        btnTopDonors.setOnClickListener(v ->
+                startActivity(new Intent(this, TopDonorsActivity.class)));
     }
 
     // ─────────────────────────────────────────────
