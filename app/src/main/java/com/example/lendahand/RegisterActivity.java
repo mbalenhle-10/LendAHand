@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerButton;
     TextView loginText;
 
-    String registerUrl = "https://wmc.ms.wits.ac.za/students/s2562712/api/register.php";
+    String registerUrl = "https://wmc.ms.wits.ac.za/students/sgroup2685/public/api/auth/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

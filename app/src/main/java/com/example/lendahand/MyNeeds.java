@@ -26,7 +26,7 @@ import okhttp3.Response;
 
 public class MyNeeds extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/s2562712/api/";
+    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/sgroup2685/public/api/auth/";
 
     private TextView    addNeed;
     private TextView    tvPending, tvPartial, tvFulfilled;

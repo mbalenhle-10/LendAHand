@@ -23,7 +23,7 @@ import okhttp3.Response;
 
 public class UserProfileActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/s2562712/api/";
+    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/sgroup2685/public/api/auth/";
     private final OkHttpClient httpClient = new OkHttpClient();
 
     // Header

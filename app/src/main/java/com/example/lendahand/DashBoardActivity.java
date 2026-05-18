@@ -33,7 +33,7 @@ public class DashBoardActivity extends AppCompatActivity {
     private String username;
 
     // API
-    private final String statsUrl = "https://wmc.ms.wits.ac.za/students/s2562712/api/stats.php";;
+    private final String statsUrl = "https://wmc.ms.wits.ac.za/students/sgroup2685/public/api/auth/stats.php";;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -33,7 +33,7 @@ import okhttp3.Response;
 
 public class DonateActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/s2562712/api/";
+    private static final String BASE_URL = "https://wmc.ms.wits.ac.za/students/sgroup2685/public/api/auth/";
 
 
     private final LinkedHashMap<String, List<Map<String, String>>> categoryItemMap = new LinkedHashMap<>();
